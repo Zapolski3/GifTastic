@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GifTastic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="movie-form">
+        <label for="brand-input">Add a car brand</label><br>
+        <input type="text" id="brand-input"><br>
+
+        <!-- Button triggers new car brand to be added -->
+        <input id="add-car" type="submit" value="Add">
+    </form>
+    <div id="buttons"></div>
+    <div id="main-content"></div>
+
+    <script type="text/javascript">
+
+        var topics = ['ford', 'chevrolet', 'chrysler', 'dodge', 'gmc', 'bmw', 'mercedes', 'audi', 'vw', 'honda', 'acura', 'toyta', 'lexus', 'nissan', 'infiniti'];
+
+        function callAjax (){
+            
+        }
+
+
+
+
+
+
+        function creationOfButtons() {
+            $("#buttons").empty();
+
+            for (var i = 0; i < topics.length; i++) {
+
+                var btn = $('<button>');
+                btn.attr('info', topics[i]);
+                btn.text(topics[i]);
+                $('#buttons').append(btn);
+
+            }
+         }
+         creationOfButtons();
+
+        $('#add-car').on('click', function (event) {
+            event.preventDefault();
+            var newInput = $('#brand-input').val().trim();
+            console.log(newInput);
+
+            topics.push(newInput);
+            console.log(topics.length);
+            creationOfButtons();
+
+        })
+
+
+        
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
