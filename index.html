@@ -17,17 +17,70 @@
         <!-- Button triggers new car brand to be added -->
         <input id="add-car" type="submit" value="Add">
     </form>
-    <div id="buttons"></div>
+    <br>
+    <br>
+    <div id="buttons">
+        <button data-name="ford">Ford</button>
+    </div>
     <div id="main-content"></div>
 
     <script type="text/javascript">
 
-        var topics = ['ford', 'chevrolet', 'chrysler', 'dodge', 'gmc', 'bmw', 'mercedes', 'audi', 'vw', 'honda', 'acura', 'toyta', 'lexus', 'nissan', 'infiniti'];
+        var topics = ['ford'];
+        
 
-        function callAjax (){
+
+        
+        
+        
+        function callAjax() {
+            $("#main-content").empty();
+            var car = $(this).attr('data-name');
+            console.log('========')
+            console.log($(this));
             
-        }
 
+            var myUrl = "https://api.giphy.com/v1/gifs/search?api_key=JoE4qj9IiOsrbPGXkJA2fm8rzRWFq7u6&q=" + car + "&limit=10&offset=0&rating=G&lang=en"
+
+             $.ajax({
+                url: myUrl,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+
+                var results = response.data;
+
+                // Looping through each result item
+                for (var i = 0; i < results.length; i++) {
+
+                    // Creating and storing a div tag
+                    var carDiv = $("<div>");
+
+                    // Creating a paragraph tag with the result item's rating
+                    var p = $("<p>").text("Rating: " + results[i].rating);
+                    
+                        
+
+                    // Creating and storing an image tag
+                    var carImage = $("<img>");
+                    carImage.addClass("gif");
+                    // Setting the src attribute of the image to a property pulled off the result item
+                    carImage.attr("src", results[i].images.fixed_height_still.url);
+                    carImage.attr("data-animate", results[i].images.fixed_height.url);
+                    // adding data-still attribute
+                    carImage.attr("data-still", results[i].images.fixed_height_still.url);
+                    carImage.attr("data-state", "still");
+                    
+                    // Appending the paragraph and image tag to the animalDiv
+                    carDiv.append(p);
+                    
+                    carDiv.append(carImage);
+
+                    // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
+                    $("#main-content").prepend(carDiv);
+                }
+            });
+        }
 
 
 
@@ -39,28 +92,58 @@
             for (var i = 0; i < topics.length; i++) {
 
                 var btn = $('<button>');
-                btn.attr('info', topics[i]);
+
+                btn.addClass("movie-btn");
+
+                // Adding a data-attribute
+                btn.attr("data-name", topics[i]);
+
                 btn.text(topics[i]);
+
                 $('#buttons').append(btn);
 
             }
-         }
-         creationOfButtons();
+        }
+        creationOfButtons();
 
         $('#add-car').on('click', function (event) {
             event.preventDefault();
             var newInput = $('#brand-input').val().trim();
+            console.log("======= I was clicked ======== :) ")
             console.log(newInput);
 
             topics.push(newInput);
             console.log(topics.length);
+            console.log(topics);
+            console.log();
             creationOfButtons();
+    
 
-        })
+        });
 
+
+
+        $(document).on("click", ".gif", function() {
+            console.log("I was clicked")
+      // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+      var state = $(this).attr("data-state");
+      // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+      // Then, set the image's data-state to animate
+      // Else set src to the data-still value
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    });
+       
+
+        $(document).on("click", ".movie-btn", callAjax);
+       
 
         
-
 
 
 
