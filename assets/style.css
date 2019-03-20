@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    color:yellow;
+}
+div {
+    float: left;
+    margin-left: 40px;
+    margin-top:20px;
+}
+
+input {
+    font-size: 22px;
+    width:160px;
+    height:25px;
+}
+
+label {
+    font-size:25px;
+}
+
+#add-car {
+    width:160px;
+    height:25px;
+}
+
+button {
+    border-radius: 10px;
+    margin-top:10px;
+    margin-left:20px;
+    width:80px;
+    height:30px;
+    font-weight: bold;
+}

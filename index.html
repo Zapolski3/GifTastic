@@ -7,26 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GifTastic</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="assets/style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
     <form id="movie-form">
         <label for="brand-input">Add a car brand</label><br>
-        <input type="text" id="brand-input"><br>
+        <input type="text" id="brand-input" size="60">
+        <br>
+        <br>
 
         <!-- Button triggers new car brand to be added -->
         <input id="add-car" type="submit" value="Add">
+        <!-- <input id="add-car" type="submit" value="delete all"> -->
     </form>
     <br>
     <br>
     <div id="buttons">
         <button data-name="ford">Ford</button>
+        <button data-name="BMW">BMW</button>
+        <button data-name="Opel">Opel</button>
+        <button data-name="Audi">Audi</button>
+        <button data-name="Lexus">Lexus</button>
     </div>
     <div id="main-content"></div>
 
     <script type="text/javascript">
 
-        var topics = ['ford'];
+        var topics = ['Ford','BMW','Opel','Audi','Lexus'];
         
 
 
@@ -72,10 +80,10 @@
                     carImage.attr("data-state", "still");
                     
                     // Appending the paragraph and image tag to the animalDiv
+
+                    carDiv.append(carImage);
                     carDiv.append(p);
                     
-                    carDiv.append(carImage);
-
                     // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
                     $("#main-content").prepend(carDiv);
                 }
