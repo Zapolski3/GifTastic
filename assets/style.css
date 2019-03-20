@@ -37,6 +37,9 @@ button {
 @media screen and (max-width:640px){
 
     button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         color:yellow;
     }
    
